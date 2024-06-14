@@ -1,6 +1,6 @@
 ---
 - name: Check pacman.conf contents
-  command: cat /etc/pacman.conf
+  ansible.builtin.command: cat /etc/pacman.conf
   register: pacman_conf_output
   changed_when: false
 
