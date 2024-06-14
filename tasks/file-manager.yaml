@@ -1,0 +1,14 @@
+---
+- name: Install file manager packages
+  become: true
+  kewlfft.aur.aur:
+    name:
+      - thunar
+      - thunar-volman
+      - gvfs
+      - gvfs-afc
+      - gvfs-gphoto2
+      - gvfs-mtp
+    use: yay
+    state: present
+  changed_when: false

@@ -54,6 +54,13 @@
         - install
         - fonts
 
+    - name: Include file manager tasks
+      ansible.builtin.import_tasks:
+        file: tasks/file-manager.yaml
+      tags:
+        - install
+        - file-manager
+
     - name: Include ssh tasks
       ansible.builtin.import_tasks:
         file: tasks/ssh.yaml
