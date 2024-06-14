@@ -61,6 +61,13 @@
         - install
         - file-manager
 
+    - name: Include sound tasks
+      ansible.builtin.import_tasks:
+        file: tasks/file-manager.yaml
+      tags:
+        - install
+        - sound
+
     - name: Include ssh tasks
       ansible.builtin.import_tasks:
         file: tasks/ssh.yaml

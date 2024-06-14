@@ -1,0 +1,23 @@
+---
+- name: Install sound packages
+  become: true
+  kewlfft.aur.aur:
+    name:
+      - alsa-utils
+      - pulseaudio-alsa
+      - pulseaudio-equalizer
+      - pavucontrol
+    use: yay
+    state: present
+  changed_when: false
+
+- name: Create PulseAudio config dir
+  ansible.builtin.file:
+    path: "/etc/pulse/default.pa.d"
+    state: directory
+    mode: "0755"
+  become: true
+
+- name: Disable PulseAudio mute behavior
+  ansible.builtin.shell: cat "unload-module module-role-cork" > /etc/pulse/default.pa.d/no-cork.pa
+  become: true
