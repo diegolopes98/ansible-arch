@@ -1,0 +1,49 @@
+---
+- name: Setup archlinux
+  vars:
+    ssh_source_key: "./vault/ssh/id_rsa"
+    ssh_dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+  hosts: localhost
+  tasks:
+    - name: Start Pacman Key
+      ansible.builtin.import_tasks:
+        file: tasks/pacman/key-init.yaml
+      tags:
+        - install
+        - pacman
+
+    - name: Add Pacman Multilib
+      ansible.builtin.import_tasks:
+        file: tasks/pacman/multilib-repo.yaml
+      tags:
+        - install
+        - pacman
+
+    - name: Pacman Update
+      ansible.builtin.import_tasks:
+        file: tasks/pacman/update.yaml
+      tags:
+        - install
+        - pacman
+
+    - name: Include core-utils tasks
+      ansible.builtin.import_tasks:
+        file: tasks/core-utils.yaml
+      tags:
+        - install
+        - core-utils
+
+    - name: Include aur tasks
+      ansible.builtin.import_tasks:
+        file: tasks/aur.yaml
+      tags:
+        - install
+        - aur
+
+    - name: Include ssh tasks
+      ansible.builtin.import_tasks:
+        file: tasks/ssh.yaml
+      tags:
+        - install
+        - dotfiles
+        - ssh

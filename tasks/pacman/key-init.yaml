@@ -1,0 +1,10 @@
+---
+- name: Init package cache
+  become: true
+  ansible.builtin.command: pacman-key --init
+  changed_when: false
+
+- name: Install arch keyring
+  become: true
+  ansible.builtin.command: pacman -S --noconfirm archlinux-keyring
+  changed_when: false

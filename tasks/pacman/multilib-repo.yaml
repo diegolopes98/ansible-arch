@@ -1,0 +1,17 @@
+---
+- name: Check pacman.conf contents
+  command: cat /etc/pacman.conf
+  register: pacman_conf_output
+  changed_when: false
+
+- name: Add multilib repository to pacman.conf
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    line: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+    insertafter: EOF
+  when: "'[multilib]' not in pacman_conf_output.stdout"
+  changed_when: false
+  failed_when: false

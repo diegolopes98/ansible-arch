@@ -1,0 +1,6 @@
+---
+- name: Install yay aur helper
+  kewlfft.aur.aur:
+    name: yay
+    use: makepkg
+    state: present
