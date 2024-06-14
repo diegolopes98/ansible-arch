@@ -1,8 +1,10 @@
 ---
 - name: Setup archlinux
   vars:
+    user: "{{ lookup('env', 'USER') }}"
+    home: "{{ lookup('env', 'HOME') }}"
     ssh_source_key: "./vault/ssh/id_rsa"
-    ssh_dest_key: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa"
+    ssh_dest_key: "{{ home }}/.ssh/id_rsa"
   hosts: localhost
   tasks:
     - name: Start Pacman Key
@@ -46,6 +48,13 @@
       tags:
         - install
         - extra-utils
+
+    - name: Include zsh tasks
+      ansible.builtin.import_tasks:
+        file: tasks/zsh.yaml
+      tags:
+        - install
+        - zsh
 
     - name: Include fonts tasks
       ansible.builtin.import_tasks:
