@@ -13,14 +13,23 @@
     state: present
   changed_when: false
 
-- name: Make sure extra-utils daemons are enabled
+- name: Make sure acpid is enabled
   ansible.builtin.systemd_service:
     enabled: true
-    name: "{{ item }}"
-  loop:
-    - acpid
-    - avahi-daemon
-    - systemd-timesyncd.service
+    name: acpid
+  become: true
+
+- name: Make sure avahi-daemon is enabled
+  ansible.builtin.systemd_service:
+    enabled: true
+    name: avahi-daemon
+  become: true
+
+
+- name: Make sure  systemd-timesyncd is enabled
+  ansible.builtin.systemd_service:
+    enabled: true
+    name: systemd-timesyncd.service
   become: true
 
 - name: Check for SSD storages
