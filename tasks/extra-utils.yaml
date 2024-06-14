@@ -1,0 +1,33 @@
+---
+- name: Install extra-utils packages
+  become: true
+  kewlfft.aur.aur:
+    name:
+      - jshon
+      - expac
+      - acpid
+      - avahi
+      - net-tools
+      - xdg-user-dirs
+    use: yay
+    state: present
+  changed_when: false
+
+- name: Make sure extra-utils daemons are enabled
+  ansible.builtin.systemd_service:
+    state: started
+    name:
+      - acpid
+      - avahi-daemon
+      - acpid
+
+- name: Check for SSD storages
+  ansible.builtin.command: cat /sys/block/sda/queue/rotational
+  register: is_ssd_output
+  changed: false
+
+- name: Make sure extra-utils daemons are enabled
+  ansible.builtin.systemd_service:
+    state: started
+    name: fstrim.timer
+  when: "'0' in is_ssd_output.stdout"

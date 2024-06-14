@@ -40,6 +40,13 @@
         - install
         - aur
 
+    - name: Include extra-utils tasks
+      ansible.builtin.import_tasks:
+        file: tasks/extra-utils.yaml
+      tags:
+        - install
+        - extra-utils
+
     - name: Include fonts tasks
       ansible.builtin.import_tasks:
         file: tasks/fonts.yaml
