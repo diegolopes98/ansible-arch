@@ -4,11 +4,13 @@
     path: "{{ lookup('env', 'HOME') }}/.ssh"
     state: directory
     mode: "0755"
+
 - name: Install ssh key
   ansible.builtin.copy:
     src: "{{ ssh_source_key }}"
     dest: "{{ ssh_dest_key }}"
     mode: "0600"
+
 - name: Install ssh key public
   ansible.builtin.copy:
     src: "{{ ssh_source_key }}.pub"
