@@ -40,6 +40,13 @@
         - install
         - aur
 
+    - name: Include fonts tasks
+      ansible.builtin.import_tasks:
+        file: tasks/fonts.yaml
+      tags:
+        - install
+        - fonts
+
     - name: Include ssh tasks
       ansible.builtin.import_tasks:
         file: tasks/ssh.yaml
