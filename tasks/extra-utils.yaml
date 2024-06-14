@@ -15,19 +15,22 @@
 
 - name: Make sure extra-utils daemons are enabled
   ansible.builtin.systemd_service:
-    state: started
-    name:
-      - acpid
-      - avahi-daemon
-      - acpid
+    enabled: true
+    name: "{{ item }}"
+  loop:
+    - acpid
+    - avahi-daemon
+    - systemd-timesyncd.service
+  become: true
 
 - name: Check for SSD storages
-  ansible.builtin.command: cat /sys/block/sda/queue/rotational
+  ansible.builtin.command: cat /sys/block/sda/queue/rotational /sys/block/nvme0n1/queue/rotational
   register: is_ssd_output
-  changed: false
+  changed_when: false
 
-- name: Make sure extra-utils daemons are enabled
+- name: Make sure fstrim timer is enabled when there is a SSD storage
   ansible.builtin.systemd_service:
-    state: started
+    enabled: true
     name: fstrim.timer
   when: "'0' in is_ssd_output.stdout"
+  become: true
