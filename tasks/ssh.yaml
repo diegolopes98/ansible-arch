@@ -1,7 +1,7 @@
 ---
 - name: Create .ssh at $HOME
   ansible.builtin.file:
-    path: "{{ lookup('env', 'HOME') }}/.ssh"
+    path: "{{ home }}/.ssh"
     state: directory
     mode: "0755"
 
