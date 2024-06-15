@@ -1,0 +1,28 @@
+---
+- name: Install vpn packages
+  kewlfft.aur.aur:
+    name:
+      - nordvpn-bin
+    use: yay
+    state: present
+  changed_when: false
+
+- name: Ensure vpn group exists
+  become: true
+  ansible.builtin.group:
+    name: nordvpn
+    state: present
+
+- name: Add $USER to vpn group
+  become: true
+  ansible.builtin.user:
+    name: "{{ user }}"
+    groups: nordvpn
+    append: true
+
+- name: Make sure vpn is enabled
+  become: true
+  ansible.builtin.systemd_service:
+    enabled: true
+    state: started
+    name: nordvpnd.service

@@ -1,0 +1,18 @@
+---
+- name: Install bluetooth packages
+  become: true
+  kewlfft.aur.aur:
+    name:
+      - bluez
+      - bluez-utils
+      - pulseaudio-bluetooth
+    use: yay
+    state: present
+  changed_when: false
+
+- name: Make sure bluetooth is enabled
+  ansible.builtin.systemd_service:
+    enabled: true
+    state: started
+    name: bluetooth
+  become: true

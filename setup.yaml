@@ -72,10 +72,24 @@
 
     - name: Include sound tasks
       ansible.builtin.import_tasks:
-        file: tasks/file-manager.yaml
+        file: tasks/sound.yaml
       tags:
         - install
         - sound
+
+    - name: Include bluetooth tasks
+      ansible.builtin.import_tasks:
+        file: tasks/bluetooth.yaml
+      tags:
+        - install
+        - bluetooth
+
+    - name: Include vpn tasks
+      ansible.builtin.import_tasks:
+        file: tasks/vpn.yaml
+      tags:
+        - install
+        - vpn
 
     - name: Include ssh tasks
       ansible.builtin.import_tasks:
