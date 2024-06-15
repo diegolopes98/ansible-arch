@@ -16,19 +16,21 @@
 - name: Make sure acpid is enabled
   ansible.builtin.systemd_service:
     enabled: true
+    state: started
     name: acpid
   become: true
 
 - name: Make sure avahi-daemon is enabled
   ansible.builtin.systemd_service:
     enabled: true
+    state: started
     name: avahi-daemon
   become: true
-
 
 - name: Make sure  systemd-timesyncd is enabled
   ansible.builtin.systemd_service:
     enabled: true
+    state: started
     name: systemd-timesyncd.service
   become: true
 
@@ -40,6 +42,7 @@
 - name: Make sure fstrim timer is enabled when there is a SSD storage
   ansible.builtin.systemd_service:
     enabled: true
+    state: started
     name: fstrim.timer
   when: "'0' in is_ssd_output.stdout"
   become: true
