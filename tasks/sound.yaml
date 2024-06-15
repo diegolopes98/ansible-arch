@@ -19,5 +19,6 @@
   become: true
 
 - name: Disable PulseAudio mute behavior
-  ansible.builtin.shell: cat "unload-module module-role-cork" > /etc/pulse/default.pa.d/no-cork.pa
+  ansible.builtin.shell: echo "unload-module module-role-cork" > /etc/pulse/default.pa.d/no-cork.pa
   become: true
+  changed_when: false

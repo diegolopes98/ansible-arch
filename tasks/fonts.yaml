@@ -2,14 +2,9 @@
 - name: Install fonts packages
   kewlfft.aur.aur:
     name:
-      - ttf-dejavu
       - ttf-fira-code
       - ttf-fira-mono
       - ttf-firacode-nerd
-      - ttf-jetbrains-mono-nerd
-      - ttf-meslo-nerd-font-powerlevel10k
-      - ttf-sarasa-gothic
-      - ttf-ubuntu-font-family
       - noto-fonts
       - noto-fonts-emoji
       - noto-fonts-extra
