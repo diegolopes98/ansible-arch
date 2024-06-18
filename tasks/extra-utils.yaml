@@ -3,12 +3,9 @@
   become: true
   kewlfft.aur.aur:
     name:
-      - jshon
+      - jq
       - expac
       - acpid
-      - avahi
-      - net-tools
-      - xdg-user-dirs
     use: yay
     state: present
   changed_when: false
@@ -20,14 +17,7 @@
     name: acpid
   become: true
 
-- name: Make sure avahi-daemon is enabled
-  ansible.builtin.systemd_service:
-    enabled: true
-    state: started
-    name: avahi-daemon
-  become: true
-
-- name: Make sure  systemd-timesyncd is enabled
+- name: Make sure systemd-timesyncd is enabled
   ansible.builtin.systemd_service:
     enabled: true
     state: started
