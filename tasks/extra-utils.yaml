@@ -25,7 +25,7 @@
   become: true
 
 - name: Check for SSD storages
-  ansible.builtin.command: cat /sys/block/sda/queue/rotational /sys/block/nvme0n1/queue/rotational
+  ansible.builtin.command: cat /sys/block/sda/queue/rotational /sys/block/nvme0n1/queue/rotational # TODO: pass path as var
   register: is_ssd_output
   changed_when: false
 
