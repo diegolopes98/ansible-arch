@@ -3,6 +3,8 @@
   vars:
     user: "{{ lookup('env', 'USER') }}"
     home: "{{ lookup('env', 'HOME') }}"
+    gpg_pass: "{{ lookup('env', 'GPG_PASS') }}"
+    gpg_source_key: "./vault/gpg/secret.key"
     ssh_source_key: "./vault/ssh/id_rsa"
     ssh_dest_key: "{{ home }}/.ssh/id_rsa"
   hosts: localhost
@@ -96,5 +98,13 @@
         file: tasks/ssh.yaml
       tags:
         - install
-        - dotfiles
+        - keys
         - ssh
+
+    - name: Include gpg tasks
+      ansible.builtin.import_tasks:
+        file: tasks/gpg.yaml
+      tags:
+        - install
+        - keys
+        - gpg

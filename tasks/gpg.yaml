@@ -1,0 +1,14 @@
+---
+- name: Create .gpg at $HOME
+  ansible.builtin.file:
+    path: "{{ home }}/.gpg"
+    state: directory
+    mode: "0755"
+
+- name: Import gpg private key
+  ansible.builtin.command: >
+    gpg --batch
+        --passphrase {{ gpg_pass }}
+        --pinentry-mode loopback
+        --import {{ gpg_source_key }}
+  changed_when: false
