@@ -12,10 +12,11 @@
     mode: "0600"
 
 - name: Import gpg secret asc
-  ansible.builtin.shell: gpg --batch  \
-    --passphrase {{ gpg_pass }} \
-    --pinentry-mode loopback \
-    --import {{ home }}/gpg.asc
+  ansible.builtin.command: >
+    gpg --batch  \
+      --passphrase {{ gpg_pass }} \
+      --pinentry-mode loopback \
+      --import {{ home }}/gpg.asc
   changed_when: false
 
 - name: Remove temp file
