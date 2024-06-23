@@ -5,7 +5,7 @@
     home: "{{ lookup('env', 'HOME') }}"
     gpg_pass: "{{ lookup('env', 'GPG_PASS') }}"
     zsh_custom: "{{ home }}/.oh-my-zsh/custom"
-    gpg_source_key: "./vault/gpg/secret.key"
+    gpg_source_key: "./vault/gpg/secret.asc"
     ssh_source_key: "./vault/ssh/id_rsa"
     ssh_dest_key: "{{ home }}/.ssh/id_rsa"
   hosts: localhost

@@ -5,7 +5,7 @@
     state: directory
     mode: "0755"
 
-- name: Import gpg private key
+- name: Import gpg secret asc
   ansible.builtin.command: >
     gpg --batch
         --passphrase {{ gpg_pass }}
