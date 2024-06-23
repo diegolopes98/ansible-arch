@@ -5,10 +5,20 @@
     state: directory
     mode: "0755"
 
+- name: Create temp gpg secret file
+  ansible.builtin.copy:
+    src: "{{ gpg_source_key }}"
+    dest: "{{ home }}/gpg.asc"
+    mode: "0600"
+
 - name: Import gpg secret asc
-  ansible.builtin.command: >
-    gpg --batch
-        --passphrase {{ gpg_pass }}
-        --pinentry-mode loopback
-        --import {{ gpg_source_key }}
+  ansible.builtin.shell: gpg --batch  \
+    --passphrase {{ gpg_pass }} \
+    --pinentry-mode loopback \
+    --import {{ home }}/gpg.asc
   changed_when: false
+
+- name: Remove temp file
+  ansible.builtin.file:
+    path: "{{ home }}/gpg.asc"
+    state: absent
