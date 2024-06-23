@@ -1,0 +1,25 @@
+---
+- name: Install Oh-My-Zsh
+  become: true
+  become_user: "{{ user }}"
+  ansible.builtin.shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  changed_when: false
+
+- name: Clone Spaceship omz theme
+  become: true
+  become_user: "{{ user }}"
+  ansible.builtin.git:
+    repo: https://github.com/spaceship-prompt/spaceship-prompt.git
+    dest: "{{ zsh_custom }}/themes/spaceship-prompt"
+    depth: 1
+    version: v4.16.0
+    accept_hostkey: true
+    force: true
+  changed_when: false
+
+- name: Link Spaceship omz theme dir
+  become: true
+  become_user: "{{ user }}"
+  ansible.builtin.command: >
+    ln -s "{{ zsh_custom }}/themes/spaceship-prompt/spaceship.zsh-theme" "{{ zsh_custom }}/themes/spaceship.zsh-theme"
+  changed_when: false

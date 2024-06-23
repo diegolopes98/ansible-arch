@@ -4,6 +4,7 @@
     user: "{{ lookup('env', 'USER') }}"
     home: "{{ lookup('env', 'HOME') }}"
     gpg_pass: "{{ lookup('env', 'GPG_PASS') }}"
+    zsh_custom: "{{ home }}/.oh-my-zsh/custom"
     gpg_source_key: "./vault/gpg/secret.key"
     ssh_source_key: "./vault/ssh/id_rsa"
     ssh_dest_key: "{{ home }}/.ssh/id_rsa"
@@ -108,3 +109,10 @@
         - install
         - keys
         - gpg
+
+    - name: Include Oh-My-Zsh tasks
+      ansible.builtin.import_tasks:
+        file: tasks/omz.yaml
+      tags:
+        - install
+        - omz
