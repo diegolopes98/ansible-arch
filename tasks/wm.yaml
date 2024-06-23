@@ -10,7 +10,6 @@
     state: present
 
 - name: Install GUI applications
-  become: true
   kewlfft.aur.aur:
     name:
       - brave-bin
