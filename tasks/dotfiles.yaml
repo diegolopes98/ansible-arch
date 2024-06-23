@@ -1,0 +1,24 @@
+---
+- name: Install GNU Stow
+  become: true
+  community.general.pacman:
+    name:
+      - stow
+    state: present
+
+- name: Cloning .dotfiles
+  ansible.builtin.git:
+    repo: git@github.com:diegolopes98/.dotfiles.git
+    dest: "{{ home }}/.dotfiles"
+    version: master
+    accept_hostkey: true
+  changed_when: false
+
+- name: Make zshrc backup
+  ansible.builtin.command: >
+    mv "{{ home }}/.zshrc" "{{ home }}/.zshrc.pre-stow"
+  changed_when: false
+
+- name: Stow .dotfiles
+  ansible.builtin.shell: cd {{ home }}/.dotfiles && stow . && cd {{ home }}
+  changed_when: false

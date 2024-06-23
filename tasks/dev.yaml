@@ -1,0 +1,12 @@
+---
+- name: Install asdf and podman
+  kewlfft.aur.aur:
+    name:
+      - asdf-vm
+      - podman
+      - podman-compose
+      - slirp4netns
+      - netavark
+      - aardvark-dns
+    state: present
+  changed_when: false

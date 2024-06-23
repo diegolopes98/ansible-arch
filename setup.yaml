@@ -125,3 +125,18 @@
         - install
         - file-manager
         - gui
+
+    - name: Include dotfiles tasks
+      ansible.builtin.import_tasks:
+        file: tasks/dotfiles.yaml
+      tags:
+        - install
+        - stow
+        - dotfiles
+
+    - name: Include development tasks
+      ansible.builtin.import_tasks:
+        file: tasks/dev.yaml
+      tags:
+        - install
+        - dev
