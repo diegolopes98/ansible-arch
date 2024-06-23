@@ -1,0 +1,22 @@
+---
+- name: Install Window Manager
+  become: true
+  community.general.pacman:
+    name:
+      - xorg
+      - xorg-xinit
+      - i3
+      - dmenu
+    state: present
+
+- name: Install GUI applications
+  become: true
+  kewlfft.aur.aur:
+    name:
+      - brave-bin
+      - visual-studio-code-bin
+      - vlc
+      - redshift
+    use: yay
+    state: present
+  changed_when: false

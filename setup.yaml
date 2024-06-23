@@ -31,19 +31,19 @@
         - install
         - pacman
 
-    - name: Include core-utils tasks
-      ansible.builtin.import_tasks:
-        file: tasks/core-utils.yaml
-      tags:
-        - install
-        - core-utils
-
     - name: Include aur tasks
       ansible.builtin.import_tasks:
         file: tasks/aur.yaml
       tags:
         - install
         - aur
+
+    - name: Include core-utils tasks
+      ansible.builtin.import_tasks:
+        file: tasks/core-utils.yaml
+      tags:
+        - install
+        - core-utils
 
     - name: Include extra-utils tasks
       ansible.builtin.import_tasks:
@@ -59,19 +59,19 @@
         - install
         - zsh
 
+    - name: Include Oh-My-Zsh tasks
+      ansible.builtin.import_tasks:
+        file: tasks/omz.yaml
+      tags:
+        - install
+        - omz
+
     - name: Include fonts tasks
       ansible.builtin.import_tasks:
         file: tasks/fonts.yaml
       tags:
         - install
         - fonts
-
-    - name: Include file manager tasks
-      ansible.builtin.import_tasks:
-        file: tasks/file-manager.yaml
-      tags:
-        - install
-        - file-manager
 
     - name: Include sound tasks
       ansible.builtin.import_tasks:
@@ -110,9 +110,18 @@
         - keys
         - gpg
 
-    - name: Include Oh-My-Zsh tasks
+    - name: Include Window Manager tasks
       ansible.builtin.import_tasks:
-        file: tasks/omz.yaml
+        file: tasks/wm.yaml
       tags:
         - install
-        - omz
+        - wm
+        - gui
+
+    - name: Include file manager tasks
+      ansible.builtin.import_tasks:
+        file: tasks/file-manager.yaml
+      tags:
+        - install
+        - file-manager
+        - gui
