@@ -1,0 +1,20 @@
+---
+- name: Get Kubectl Version
+  ansible.builtin.uri:
+    url: https://dl.k8s.io/release/stable.txt
+    return_content: true
+  changed_when: false
+  register: kubectl_version_stable
+
+- name: Download Kubectl Binary
+  ansible.builtin.get_url:
+    url: "https://dl.k8s.io/release/{{ kubectl_version_stable.content }}/bin/linux/amd64/kubectl"
+    dest: "{{ home }}/kubectl"
+    mode: "0644"
+    checksum: sha256:https://dl.k8s.io/release/{{ kubectl_version_stable.content }}/bin/linux/amd64/kubectl.sha256
+  changed_when: false
+
+- name: Install Kubectl
+  become: true
+  ansible.builtin.command: install -o root -g root -m 0755 "{{ home }}/kubectl" /usr/local/bin/kubectl
+  changed_when: false

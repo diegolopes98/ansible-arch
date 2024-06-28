@@ -140,3 +140,10 @@
       tags:
         - install
         - dev
+
+    - name: Include k8s tasks
+      ansible.builtin.import_tasks:
+        file: tasks/kubectl.yaml
+      tags:
+        - install
+        - k8s
