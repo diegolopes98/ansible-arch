@@ -14,7 +14,6 @@
   kewlfft.aur.aur:
     name:
       - brave-bin
-      - visual-studio-code-bin
       - vlc
       - redshift
     use: yay

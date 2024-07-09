@@ -1,5 +1,5 @@
 ---
-- name: Install asdf and podman
+- name: Install asdf, podman and other developer tools
   kewlfft.aur.aur:
     name:
       - asdf-vm
@@ -8,6 +8,9 @@
       - slirp4netns
       - netavark
       - aardvark-dns
+      - tmux
+      - nvim
+      - visual-studio-code-bin
     state: present
   changed_when: false
 
