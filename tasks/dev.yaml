@@ -10,3 +10,9 @@
       - aardvark-dns
     state: present
   changed_when: false
+
+- name: Enable podman socket
+  ansible.builtin.systemd_service:
+    enabled: true
+    state: started
+    name: podman.socket

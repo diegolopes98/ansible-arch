@@ -15,14 +15,12 @@
     enabled: true
     state: started
     name: acpid
-  become: true
 
 - name: Make sure systemd-timesyncd is enabled
   ansible.builtin.systemd_service:
     enabled: true
     state: started
     name: systemd-timesyncd.service
-  become: true
 
 - name: Check for SSD storages
   ansible.builtin.command: cat /sys/block/sda/queue/rotational /sys/block/nvme0n1/queue/rotational # TODO: pass path as var

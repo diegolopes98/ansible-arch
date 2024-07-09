@@ -15,4 +15,3 @@
     enabled: true
     state: started
     name: bluetooth
-  become: true
