@@ -16,6 +16,9 @@
       - brave-bin
       - vlc
       - redshift
+      - xclip
+      - xdotool
+      - maim
     use: yay
     state: present
   changed_when: false
